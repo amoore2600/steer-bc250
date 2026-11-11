@@ -1,0 +1,6 @@
+agent_ws/
+results/
+scratch/
+src/
+__pycache__/
+*.pyc

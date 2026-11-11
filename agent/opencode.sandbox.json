@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "bc250": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "BC-250 (llama.cpp, LAN)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1"
+      },
+      "models": {
+        "Qwen3-Coder-30B-A3B-Instruct-UD-IQ3_XXS": {
+          "name": "Qwen3-Coder 30B-A3B IQ3_XXS (BC-250)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "Qwen3-Coder-30B-A3B-Instruct-UD-Q2_K_XL": {
+          "name": "Qwen3-Coder 30B-A3B Q2_K_XL (BC-250)",
+          "limit": {
+            "context": 49152,
+            "output": 8192
+          }
+        },
+        "gpt-oss-20b-MXFP4": {
+          "name": "gpt-oss 20B MXFP4 (BC-250)",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
+        },
+        "Qwen3.6-35B-A3B-UD-IQ2_M": {
+          "name": "Qwen3.6 35B-A3B IQ2_M (BC-250)",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
+        }
+      }
+    }
+  },
+  "model": "bc250/gpt-oss-20b-MXFP4",
+  "small_model": "bc250/gpt-oss-20b-MXFP4"
+}
