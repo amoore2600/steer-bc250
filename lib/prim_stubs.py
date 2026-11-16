@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """prim_stubs.py <out.v> <module>... -- port/parameter-only stubs of Gowin GW5A primitives from prim_sim.v,
-for Verilator lint (Verilator cannot parse prim_sim.v itself)."""
+for Verilator lint (Verilator cannot parse prim_sim.v itself). GOWIN_HOME is the Gowin IDE directory (default ~/gowin/IDE)."""
 import os, re, sys
-src = open(os.path.expanduser("~/gowin/IDE/simlib/gw5a/prim_sim.v"), errors="replace").read()
+src = open(os.path.join(os.path.expanduser(os.environ.get("GOWIN_HOME", "~/gowin/IDE")), "simlib", "gw5a", "prim_sim.v"), errors="replace").read()
 out = ["// Port/parameter stubs of Gowin GW5A primitives, for lint only.", "/* verilator lint_off UNUSEDSIGNAL */",
        "/* verilator lint_off UNUSEDPARAM */", "/* verilator lint_off UNDRIVEN */", "/* verilator lint_off DECLFILENAME */"]
 for m in sys.argv[2:]:

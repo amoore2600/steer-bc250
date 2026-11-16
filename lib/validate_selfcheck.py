@@ -7,10 +7,11 @@ Per rebuild / bugfix task:
   (c) how many mutants it catches out of the total (reported, not required),
   (d) the self-check seed is not a grader seed; the input traces of the self-check seed and of every grader seed are
       compared over the self-check window (fraction of sample points with identical inputs),
-  (e) hdl-check.sh --tb, exactly as TASK.md tells the agent, run from a workspace built by run_agent.build_workspace
+  (e) `bash run_selfcheck.sh`, exactly as TASK.md tells the agent (hdl-check.sh --tb, then hygiene_check.py: -Wall
+      and the file checks of lib/hygiene.py), run from a workspace built by run_agent.build_workspace
       (provide_tests=True) with the golden in place: RESULT: PASS and the literal PASS line; and on the untouched start
       workspace: RESULT: FAIL.
-Writes ~/steer-bc250/tasks/SELFCHECK-VALIDATION.md and <scratch>/selfcheck_validation.json.  Nothing in the task
+Writes tasks/SELFCHECK-VALIDATION.md and <scratch>/selfcheck_validation.json.  Nothing in the task
 directories is modified.  Scratch: $SELFCHECK_SCRATCH (default: a temp dir).
 """
 import glob, json, os, re, shutil, subprocess, sys, tempfile, time
@@ -25,7 +26,7 @@ import run_api  # noqa: E402  (load_tasks)
 
 LIGHT = os.path.join(LIB, "light.sh")
 GHDL = ["--std=08", "-fsynopsys", "-frelaxed"]
-SIMLIB = os.path.expanduser("~/gowin/IDE/simlib/gw5a")
+SIMLIB = os.path.join(os.path.expanduser(os.environ.get("GOWIN_HOME", "~/gowin/IDE")), "simlib", "gw5a")
 SCRATCH = os.environ.get("SELFCHECK_SCRATCH") or tempfile.mkdtemp(prefix="selfcheck_val_")
 BAD = re.compile(r"fail|error|mismatch", re.I)
 
@@ -139,7 +140,7 @@ def hdlcheck(cfg, td, sc, root):
     for which in ("start", "golden"):
         if which == "golden":
             shutil.copy(os.path.join(td, "golden", cfg["golden_files"][0]), os.path.join(ws, cfg["golden_files"][0]))
-        rc, out, dt = run(["bash", "-c", sc["hdl_check_cmd"]], 600, cwd=ws, env=env)
+        rc, out, dt = run(["bash", "run_selfcheck.sh"], 600, cwd=ws, env=env)
         rl = [l for l in out.splitlines() if l.startswith("RESULT:")]
         res[which] = {"rc": rc, "result": rl[-1] if rl else "(no RESULT line, rc=%d)" % rc,
                       "pass_line": any(l.strip() == "PASS" for l in out.splitlines()),
@@ -159,7 +160,7 @@ def main():
         cfg = json.load(open(tj))
         if names and cfg["id"] not in names:
             continue
-        if cfg["type"] not in ("rebuild", "bugfix"):
+        if cfg["type"] not in ("rebuild", "bugfix") and not (cfg["type"] == "kat" and cfg.get("equiv")):
             continue
         row = {"task": cfg["id"], "language": cfg["language"], "type": cfg["type"], "gowin": bool(cfg.get("gowin"))}
         scj = os.path.join(td, "selfcheck", "selfcheck.json")

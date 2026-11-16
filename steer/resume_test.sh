@@ -3,7 +3,7 @@
 # agent/sandbox.sh can be continued by a second `opencode run --session <id>` against the same OpenCode state dir,
 # and that a session whose turn was killed mid-way can be continued too.  Uses the BC-250 router (gpt-oss).
 set -u
-B=~/steer-bc250; OC=/opt/OpenCode/resources/opencode-cli; M=${MODEL:-gpt-oss-20b-MXFP4}
+B=$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd); OC=/opt/OpenCode/resources/opencode-cli; M=${MODEL:-gpt-oss-20b-MXFP4}
 T=$B/agent_ws/resume_test; rm -rf "$T"; mkdir -p "$T/work" "$T/oc"
 SK=$B/agent_ws/sock/rt$$; rm -rf "$SK"; mkdir -p "$SK"
 cp $B/agent/opencode.sandbox.json "$SK/opencode.json"

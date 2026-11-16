@@ -1,0 +1,26 @@
+# heatguard.conf -- configuration for steer/heatguard.sh (sourced by bash). Copy to steer/heatguard.conf (git-ignored)
+# or point HEATGUARD_CONF at your copy. Board names are free; they are passed to read_temps and set_cap.
+
+BOARDS="board1"
+
+# GPU cap steps per board in MHz, highest first; the last one is the floor.
+STEPS[board1]="1500 1300 1100"
+
+# The llama.cpp server of each board (models are unloaded here on a dangerous reading).
+URL[board1]="http://localhost:8080"
+
+# The model to unload on a dangerous reading (empty: unload nothing).
+UNLOAD_MODEL="gpt-oss-20b-MXFP4"
+
+# read_temps <board>: print the board's latest reading as one CSV line, time,tctl,edge,<f4>,<f5>,<f6>,<f7>,<f8>,cap
+# (Tctl and GPU edge in whole degrees C in fields 2 and 3, the current GPU cap in MHz in field 9). Example: a logger on
+# the board that appends such a line every few seconds to a daily CSV file.
+read_temps() {
+    timeout 10 ssh -o ConnectTimeout=6 "$1" 'tail -1 /var/log/thermal/$(date +%F).csv'
+}
+
+# set_cap <board> <mhz>: set the board's GPU clock cap. Replace with the command your GPU governor accepts.
+set_cap() {
+    echo "set_cap: not configured (board $1, $2 MHz)" >&2
+    return 1
+}

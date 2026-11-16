@@ -106,13 +106,25 @@ def main():
     p.append("                kn = kn + 1; if (c[i] !== g[i]) bad = 1; end")
     p.append("        end")
     p.append("    endtask")
+    ins = [(n, w) for n, d, w in ports if d == "input" and n not in cnames]
+    p.append("    task show_inputs; begin")
+    if ins:
+        p.append("        $display(\"MISMATCH_INPUTS cyc=%%0d %s\", cyc, %s);" % (" ".join("%s=%%h" % n for n, _ in ins[:24]),
+                                                                          ", ".join(n for n, _ in ins[:24])))
+    p.append("    end endtask")
     p.append("    task check; begin checks = checks + 1;")
     for n, d, w in ports:
         if d == "input":
             continue
         p.append("        cmp_bits_(g_%s, c_%s, %d, bad_t, kn_t); known = known + kn_t;" % (n, n, w))
-        p.append("        if (bad_t) begin errs = errs + 1; if (errs <= 5)")
+        p.append("        if (bad_t) begin errs = errs + 1; if (errs == 1) show_inputs; if (errs <= 5)")
         p.append("            $display(\"MISMATCH t=%%0t cyc=%%0d port=%s golden=%%h candidate=%%h\", $time, cyc, g_%s, c_%s); end" % (n, n, n))
+    # internal registers compared by hierarchical name (section tasks: the skeleton declares them in both modules)
+    for x in eq.get("compare_state", []):
+        e = x.get("expr", x["name"])
+        p.append("        cmp_bits_(u_g.%s, u_c.%s, %d, bad_t, kn_t); known = known + kn_t;" % (e, e, x["width"]))
+        p.append("        if (bad_t) begin errs = errs + 1; if (errs == 1) show_inputs; if (errs <= 5)")
+        p.append("            $display(\"MISMATCH t=%%0t cyc=%%0d state=%s golden=%%h candidate=%%h\", $time, cyc, u_g.%s, u_c.%s); end" % (x["name"], e, e))
     p.append("    end endtask")
     p.append("    initial begin")
     p.append("        errs = 0; checks = 0; known = 0; cyc = 0;")

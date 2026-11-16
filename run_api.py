@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """run_api.py -- HDL bake-off runner: every (model, task) pair through the BC-250 llama-server, graded locally.
 
-  python3 ~/steer-bc250/run_api.py --run-id <id> [--models m1,m2] [--tasks t1,t2] [--include-invalid]
+  python3 run_api.py --run-id <id> [--models m1,m2] [--tasks t1,t2] [--include-invalid]
 
 Requests are grouped by model (one swap per model).  Each pair: build the messages, size max_tokens from the
 server's own tokenizer, send (temperature 0, timeout 900 s), save the raw response, extract the last fenced code
@@ -11,7 +11,7 @@ summary.md is rewritten after every pair.  Thermal max per request window: the B
 """
 import argparse, datetime, glob, json, os, re, statistics, subprocess, sys, time, urllib.request
 
-BASE = os.path.expanduser("~/steer-bc250")
+BASE = os.environ.get("STEER_BC250_BASE") or os.path.dirname(os.path.abspath(__file__))
 URL = os.environ.get("BAKEOFF_URL", "http://localhost:8080")
 MODELS = ["Qwen3-Coder-30B-A3B-Instruct-UD-IQ3_XXS", "Qwen3-Coder-30B-A3B-Instruct-UD-Q2_K_XL",
           "Qwen3.6-35B-A3B-UD-IQ2_M", "gpt-oss-20b-MXFP4"]
@@ -379,7 +379,7 @@ def main():
                     rec["grade"] = g
                     rec.update(stage=g.get("stage"), detail=g.get("detail"), **{"pass": bool(g.get("pass"))})
                     rec["status"] = "PASS" if g.get("pass") else ("TRUNCATED" if rec["finish_reason"] == "length" else
-                                                                  ("ERROR" if g.get("stage") == "harness" else "FAIL"))
+                                                                  ("ERROR" if g.get("stage") in ("harness", "syn_pending") else "FAIL"))
             rec["finished"] = datetime.datetime.now().isoformat(timespec="seconds")
             with open(rj, "a") as f:
                 f.write(json.dumps(rec) + "\n")
