@@ -1,0 +1,11 @@
+{
+ "task": "kat_debounce",
+ "kind": "kat",
+ "language": "verilog",
+ "top": "debounce",
+ "files": [
+  "kat_check.sh",
+  "tb_debounce.v"
+ ],
+ "hdl_check_cmd": "bash kat_check.sh"
+}

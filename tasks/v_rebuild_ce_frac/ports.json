@@ -1,0 +1,1 @@
+{"ports": [["clk", "input", 1], ["reset", "input", 1], ["ce", "output", 1]]}

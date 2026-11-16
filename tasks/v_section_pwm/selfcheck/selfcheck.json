@@ -1,0 +1,26 @@
+{
+ "task": "v_section_pwm",
+ "language": "verilog",
+ "top": "pwm_gen",
+ "seed": 9001,
+ "cycles": 8000,
+ "sample_points": 79995,
+ "output_events": 22,
+ "output_bits": 2,
+ "grader_seeds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "files": [
+  "tb_selfcheck.v",
+  "tb_selfcheck_vectors.vh"
+ ],
+ "hdl_check_args": [
+  "--tb",
+  "tb_selfcheck.v",
+  "pwm_gen.v"
+ ],
+ "hdl_check_cmd": "bash ~/.config/opencode/skills/hdl-check/hdl-check.sh --tb tb_selfcheck.v pwm_gen.v"
+}

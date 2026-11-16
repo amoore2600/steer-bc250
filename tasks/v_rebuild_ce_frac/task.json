@@ -1,0 +1,65 @@
+{
+ "id": "v_rebuild_ce_frac",
+ "type": "rebuild",
+ "language": "verilog",
+ "source": "examples/ce_frac.v",
+ "top": "ce_frac",
+ "golden_files": [
+  "ce_frac.v"
+ ],
+ "gowin_syn": true,
+ "description": "Example rebuild task: a fractional clock enable (a first-order accumulator gives NUM enables in every DEN clocks).",
+ "equiv": {
+  "clocks": [
+   {
+    "name": "clk",
+    "half": 5
+   }
+  ],
+  "cycles": 8000,
+  "seeds": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "init": "        reset = 1'b0;",
+  "stim": {
+   "clk": "        if (chance(1)) reset <= 1'b1; else reset <= 1'b0;"
+  },
+  "params": {
+   "W": 8,
+   "NUM": 5,
+   "DEN": 12
+  }
+ },
+ "mutants": [
+  {
+   "repl": [
+    {
+     "from": "sum >= {1'b0, DEN}",
+     "to": "sum > {1'b0, DEN}"
+    }
+   ]
+  },
+  {
+   "repl": [
+    {
+     "from": "acc <= sum[W-1:0] - DEN;",
+     "to": "acc <= {W{1'b0}};"
+    }
+   ]
+  },
+  {
+   "repl": [
+    {
+     "from": "            acc <= {W{1'b0}};\n            ce  <= 1'b0;\n        end else if",
+     "to": "            ce  <= 1'b0;\n        end else if"
+    }
+   ]
+  }
+ ],
+ "lint_wall": true,
+ "allow_initial": true,
+ "line_count": 29
+}

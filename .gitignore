@@ -1,6 +1,9 @@
 agent_ws/
 results/
 scratch/
-src/
+src/*
+!src/examples/
+steer/heatguard.conf
+tasks/SELFCHECK-VALIDATION.md
 __pycache__/
 *.pyc

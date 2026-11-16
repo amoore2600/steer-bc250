@@ -1,0 +1,60 @@
+{
+ "id": "kat_debounce",
+ "type": "kat",
+ "language": "verilog",
+ "top": "debounce",
+ "golden_files": [
+  "debounce.v"
+ ],
+ "gowin_syn": true,
+ "description": "Example kat task: a switch debouncer graded by a known-answer testbench (no equivalence golden needed).",
+ "reference": "source/debounce.v",
+ "kat": {
+  "mode": "testbench",
+  "tb": "source/tb_debounce.v",
+  "tb_top": "tb_debounce",
+  "support_files": [],
+  "timeout": 300,
+  "worker_tb": true,
+  "pass_regex": "^KAT debounce: PASS",
+  "fail_regex": "^KAT debounce: FAIL",
+  "tb_local": "kat/tb_debounce.v",
+  "support_local": []
+ },
+ "mutants": [
+  {
+   "repl": [
+    {
+     "from": "end else if (cnt == STABLE - 3'd1) begin",
+     "to": "end else if (cnt == STABLE) begin"
+    }
+   ]
+  },
+  {
+   "repl": [
+    {
+     "from": "sync <= {sync[0], din};",
+     "to": "sync <= {din, din};"
+    }
+   ]
+  },
+  {
+   "repl": [
+    {
+     "from": "rise <= sync[1];",
+     "to": "rise <= 1'b1;"
+    }
+   ]
+  },
+  {
+   "repl": [
+    {
+     "from": "        if (sync[1] == dout) begin\n            cnt <= 3'd0;",
+     "to": "        if (sync[1] == dout) begin\n            cnt <= cnt;"
+    }
+   ]
+  }
+ ],
+ "lint_wall": true,
+ "line_count": 13
+}

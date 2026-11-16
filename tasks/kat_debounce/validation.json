@@ -1,0 +1,122 @@
+{
+ "id": "kat_debounce",
+ "type": "kat",
+ "mode": "testbench",
+ "licence_and_derived_checks": "ok",
+ "start": [
+  {
+   "file": "debounce.v",
+   "task": "kat_debounce",
+   "stage": "tb",
+   "detail": "KAT debounce: FAIL (10344 errors) | ERROR t=490000: din=1 -> dout 0 rise 0, expected dout 1 rise 1 | ERROR t=500000: din=1 -> dout 0 rise 0, expected dout 1 rise 0 | ERROR t=510000: din=1 -> dout 0 rise 0, expected dout 1 rise 0",
+   "lint_warnings_raw": 2,
+   "sim_seeds": [
+    {
+     "seed": null,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "grade_s": 0.2,
+   "pass": false
+  }
+ ],
+ "golden": {
+  "task": "kat_debounce",
+  "stage": "done",
+  "detail": "known-answer checker PASS",
+  "lint_warnings_raw": 0,
+  "sim_seeds": [
+   {
+    "seed": null,
+    "ok": true,
+    "s": 0.1
+   }
+  ],
+  "lint_wall": {
+   "checked": true,
+   "warnings": 0,
+   "first": null,
+   "waiver_problems": 0
+  },
+  "hygiene": {
+   "missing_header": 0,
+   "nettype_leak": 0,
+   "non_ascii": 0,
+   "initial_blocks": 0,
+   "dead_code": 0,
+   "debug_left": 0
+  },
+  "pinned": [],
+  "syn": null,
+  "grade_s": 0.2,
+  "pass": true
+ },
+ "mutants": [
+  {
+   "file": "m1.v",
+   "task": "kat_debounce",
+   "stage": "tb",
+   "detail": "KAT debounce: FAIL (2300 errors) | ERROR t=490000: din=1 -> dout 0 rise 0, expected dout 1 rise 1 | ERROR t=500000: din=1 -> dout 1 rise 1, expected dout 1 rise 0 | ERROR t=1030000: din=1 -> dout 1 rise 0, expected dout 0 rise 0",
+   "lint_warnings_raw": 0,
+   "sim_seeds": [
+    {
+     "seed": null,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "m2.v",
+   "task": "kat_debounce",
+   "stage": "tb",
+   "detail": "KAT debounce: FAIL (2075 errors) | ERROR t=480000: din=1 -> dout 1 rise 1, expected dout 0 rise 0 | ERROR t=490000: din=1 -> dout 1 rise 0, expected dout 1 rise 1 | ERROR t=1020000: din=1 -> dout 0 rise 0, expected dout 1 rise 0",
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": null,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "m3.v",
+   "task": "kat_debounce",
+   "stage": "tb",
+   "detail": "KAT debounce: FAIL (691 errors) | ERROR t=1030000: din=1 -> dout 0 rise 1, expected dout 0 rise 0 | ERROR t=1110000: din=1 -> dout 0 rise 1, expected dout 0 rise 0 | ERROR t=1210000: din=0 -> dout 0 rise 1, expected dout 0 rise 0",
+   "lint_warnings_raw": 0,
+   "sim_seeds": [
+    {
+     "seed": null,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "m4.v",
+   "task": "kat_debounce",
+   "stage": "tb",
+   "detail": "KAT debounce: FAIL (788 errors) | ERROR t=310000: din=1 -> dout 1 rise 1, expected dout 0 rise 0 | ERROR t=320000: din=0 -> dout 1 rise 0, expected dout 0 rise 0 | ERROR t=330000: din=0 -> dout 1 rise 0, expected dout 0 rise 0",
+   "lint_warnings_raw": 0,
+   "sim_seeds": [
+    {
+     "seed": null,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "grade_s": 0.3,
+   "pass": false
+  }
+ ],
+ "valid": true
+}

@@ -1,0 +1,426 @@
+{
+ "id": "v_section_pwm",
+ "golden_sections": [
+  {
+   "section": 1,
+   "task": "v_section_pwm",
+   "stage": "done",
+   "detail": "section 1 (drives pre_cnt, tick): equivalent on 4 seeds",
+   "section_drives": [
+    "pre_cnt",
+    "tick"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": true,
+     "s": 3.1
+    },
+    {
+     "seed": 2,
+     "ok": true,
+     "s": 3.4
+    },
+    {
+     "seed": 3,
+     "ok": true,
+     "s": 3.0
+    },
+    {
+     "seed": 4,
+     "ok": true,
+     "s": 3.0
+    }
+   ],
+   "seed_set": "default",
+   "known_bits": 7359540,
+   "lint_wall": {
+    "checked": true,
+    "warnings": 0,
+    "first": null,
+    "waiver_problems": 0
+   },
+   "hygiene": {
+    "missing_header": 0,
+    "nettype_leak": 0,
+    "non_ascii": 0,
+    "initial_blocks": 0,
+    "dead_code": 0,
+    "debug_left": 0
+   },
+   "pinned": [],
+   "syn": null,
+   "grade_s": 12.6,
+   "pass": true
+  },
+  {
+   "section": 2,
+   "task": "v_section_pwm",
+   "stage": "done",
+   "detail": "section 2 (drives cnt, duty_q): equivalent on 4 seeds",
+   "section_drives": [
+    "cnt",
+    "duty_q"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": true,
+     "s": 3.1
+    },
+    {
+     "seed": 2,
+     "ok": true,
+     "s": 3.4
+    },
+    {
+     "seed": 3,
+     "ok": true,
+     "s": 2.8
+    },
+    {
+     "seed": 4,
+     "ok": true,
+     "s": 3.0
+    }
+   ],
+   "seed_set": "default",
+   "known_bits": 7359540,
+   "lint_wall": {
+    "checked": true,
+    "warnings": 0,
+    "first": null,
+    "waiver_problems": 0
+   },
+   "hygiene": {
+    "missing_header": 0,
+    "nettype_leak": 0,
+    "non_ascii": 0,
+    "initial_blocks": 0,
+    "dead_code": 0,
+    "debug_left": 0
+   },
+   "pinned": [],
+   "syn": null,
+   "grade_s": 12.5,
+   "pass": true
+  },
+  {
+   "section": 3,
+   "task": "v_section_pwm",
+   "stage": "done",
+   "detail": "section 3 (drives pwm, period_start): equivalent on 4 seeds",
+   "section_drives": [
+    "pwm",
+    "period_start"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": true,
+     "s": 3.3
+    },
+    {
+     "seed": 2,
+     "ok": true,
+     "s": 2.9
+    },
+    {
+     "seed": 3,
+     "ok": true,
+     "s": 2.7
+    },
+    {
+     "seed": 4,
+     "ok": true,
+     "s": 3.0
+    }
+   ],
+   "seed_set": "default",
+   "known_bits": 7359540,
+   "lint_wall": {
+    "checked": true,
+    "warnings": 0,
+    "first": null,
+    "waiver_problems": 0
+   },
+   "hygiene": {
+    "missing_header": 0,
+    "nettype_leak": 0,
+    "non_ascii": 0,
+    "initial_blocks": 0,
+    "dead_code": 0,
+    "debug_left": 0
+   },
+   "pinned": [],
+   "syn": null,
+   "grade_s": 12.1,
+   "pass": true
+  }
+ ],
+ "golden": {
+  "section": 1,
+  "task": "v_section_pwm",
+  "stage": "done",
+  "detail": "all sections: 1:True, 2:True, 3:True",
+  "section_drives": [
+   "pre_cnt",
+   "tick"
+  ],
+  "lint_warnings_raw": 1,
+  "sim_seeds": [
+   {
+    "seed": 1,
+    "ok": true,
+    "s": 3.1
+   },
+   {
+    "seed": 2,
+    "ok": true,
+    "s": 3.4
+   },
+   {
+    "seed": 3,
+    "ok": true,
+    "s": 3.0
+   },
+   {
+    "seed": 4,
+    "ok": true,
+    "s": 3.0
+   }
+  ],
+  "seed_set": "default",
+  "known_bits": 7359540,
+  "lint_wall": {
+   "checked": true,
+   "warnings": 0,
+   "first": null,
+   "waiver_problems": 0
+  },
+  "hygiene": {
+   "missing_header": 0,
+   "nettype_leak": 0,
+   "non_ascii": 0,
+   "initial_blocks": 0,
+   "dead_code": 0,
+   "debug_left": 0
+  },
+  "pinned": [],
+  "syn": null,
+  "grade_s": 12.6,
+  "pass": true
+ },
+ "start": [
+  {
+   "file": "s1.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 1 (drives pre_cnt, tick): seed 1: MISMATCH t=600 cyc=1 state=pre_cnt golden=1 candidate=0 | MISMATCH_INPUTS cyc=1 reset=0 en=1 duty=00",
+   "section": 1,
+   "section_drives": [
+    "pre_cnt",
+    "tick"
+   ],
+   "lint_warnings_raw": 4,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "s2.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 2 (drives cnt, duty_q): seed 1: MISMATCH t=2600 cyc=3 state=cnt golden=01 candidate=00 | MISMATCH_INPUTS cyc=3 reset=0 en=1 duty=00",
+   "section": 2,
+   "section_drives": [
+    "cnt",
+    "duty_q"
+   ],
+   "lint_warnings_raw": 2,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "s3.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 3 (drives pwm, period_start): seed 1: MISMATCH t=2620600 cyc=2621 port=period_start golden=1 candidate=0 | MISMATCH_INPUTS cyc=2621 reset=0 en=1 duty=72",
+   "section": 3,
+   "section_drives": [
+    "pwm",
+    "period_start"
+   ],
+   "lint_warnings_raw": 2,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 1.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 1.1,
+   "pass": false
+  }
+ ],
+ "mutants": [
+  {
+   "file": "s1_m1.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 1 (drives pre_cnt, tick): seed 1: MISMATCH t=600 cyc=1 state=pre_cnt golden=1 candidate=0 | MISMATCH_INPUTS cyc=1 reset=0 en=1 duty=00",
+   "section": 1,
+   "section_drives": [
+    "pre_cnt",
+    "tick"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false,
+   "confined": true
+  },
+  {
+   "file": "s1_m2.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 1 (drives pre_cnt, tick): seed 1: MISMATCH t=172600 cyc=173 state=tick golden=0 candidate=1 | MISMATCH_INPUTS cyc=173 reset=0 en=0 duty=45",
+   "section": 1,
+   "section_drives": [
+    "pre_cnt",
+    "tick"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.1
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.3,
+   "pass": false,
+   "confined": true
+  },
+  {
+   "file": "s2_m3.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 2 (drives cnt, duty_q): seed 1: MISMATCH t=707600 cyc=708 state=duty_q golden=00 candidate=fa | MISMATCH_INPUTS cyc=708 reset=0 en=1 duty=fa",
+   "section": 2,
+   "section_drives": [
+    "cnt",
+    "duty_q"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.3
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.4,
+   "pass": false,
+   "confined": true
+  },
+  {
+   "file": "s2_m4.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 2 (drives cnt, duty_q): seed 1: MISMATCH t=2600 cyc=3 state=cnt golden=01 candidate=02 | MISMATCH_INPUTS cyc=3 reset=0 en=1 duty=00",
+   "section": 2,
+   "section_drives": [
+    "cnt",
+    "duty_q"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false,
+   "confined": true
+  },
+  {
+   "file": "s3_m5.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 3 (drives pwm, period_start): seed 1: MISMATCH t=600 cyc=1 port=pwm golden=0 candidate=1 | MISMATCH_INPUTS cyc=1 reset=0 en=1 duty=00",
+   "section": 3,
+   "section_drives": [
+    "pwm",
+    "period_start"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false,
+   "confined": true
+  },
+  {
+   "file": "s3_m6.v",
+   "task": "v_section_pwm",
+   "stage": "sim",
+   "detail": "section 3 (drives pwm, period_start): seed 1: MISMATCH t=2619600 cyc=2620 port=period_start golden=0 candidate=1 | MISMATCH_INPUTS cyc=2620 reset=0 en=1 duty=72",
+   "section": 3,
+   "section_drives": [
+    "pwm",
+    "period_start"
+   ],
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 1.4
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 1.8,
+   "pass": false,
+   "confined": true
+  }
+ ],
+ "valid": true
+}

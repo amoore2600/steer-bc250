@@ -1,0 +1,184 @@
+{
+ "id": "v_section_pwm",
+ "type": "rebuild",
+ "language": "verilog",
+ "source": "examples/pwm_gen.v",
+ "top": "pwm_gen",
+ "golden_files": [
+  "pwm_gen.v"
+ ],
+ "gowin_syn": true,
+ "description": "Example section task: an 8-bit PWM generator in three labelled sections (prescaler, period counter, output compare).",
+ "sections": [
+  {
+   "n": 1,
+   "name": "prescaler",
+   "drives": [
+    {
+     "name": "pre_cnt",
+     "width": 4
+    },
+    {
+     "name": "tick",
+     "width": 1
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "name": "period counter",
+   "drives": [
+    {
+     "name": "cnt",
+     "width": 8
+    },
+    {
+     "name": "duty_q",
+     "width": 8
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "name": "output compare",
+   "drives": [
+    {
+     "name": "pwm",
+     "width": 1
+    },
+    {
+     "name": "period_start",
+     "width": 1
+    }
+   ]
+  }
+ ],
+ "equiv": {
+  "clocks": [
+   {
+    "name": "clk",
+    "half": 5
+   }
+  ],
+  "cycles": 8000,
+  "seeds": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "init": "        reset = 1'b0;\n        en = 1'b1;\n        duty = 8'd0;",
+  "stim": {
+   "clk": "        reset <= ((r32(0) % 4096) == 0);\n        if (chance(4)) en <= ~en;\n        if (chance(8)) duty <= r32(0);"
+  },
+  "params": {
+   "PRE": 1
+  },
+  "compare_state": [
+   {
+    "name": "pre_cnt",
+    "expr": "pre_cnt",
+    "width": 4
+   },
+   {
+    "name": "tick",
+    "expr": "tick",
+    "width": 1
+   },
+   {
+    "name": "cnt",
+    "expr": "cnt",
+    "width": 8
+   },
+   {
+    "name": "duty_q",
+    "expr": "duty_q",
+    "width": 8
+   }
+  ]
+ },
+ "mutants": [
+  {
+   "section": 1,
+   "repl": [
+    {
+     "from": "if (pre_cnt == PRE) begin",
+     "to": "if (pre_cnt == PRE - 4'd1) begin"
+    }
+   ]
+  },
+  {
+   "section": 1,
+   "repl": [
+    {
+     "from": "        end else begin\n            tick <= 1'b0;\n        end\n    end\n    // END SECTION 1",
+     "to": "        end else begin\n            tick <= tick;\n        end\n    end\n    // END SECTION 1"
+    }
+   ]
+  },
+  {
+   "section": 2,
+   "repl": [
+    {
+     "from": "            if (cnt == 8'd255)\n                duty_q <= duty;",
+     "to": "            if (cnt == 8'd0)\n                duty_q <= duty;"
+    }
+   ]
+  },
+  {
+   "section": 2,
+   "repl": [
+    {
+     "from": "cnt <= cnt + 8'd1;",
+     "to": "cnt <= cnt + 8'd2;"
+    }
+   ]
+  },
+  {
+   "section": 3,
+   "repl": [
+    {
+     "from": "pwm          <= (cnt < duty_q);",
+     "to": "pwm          <= (cnt <= duty_q);"
+    }
+   ]
+  },
+  {
+   "section": 3,
+   "repl": [
+    {
+     "from": "period_start <= tick && (cnt == 8'd255);",
+     "to": "period_start <= (cnt == 8'd255);"
+    }
+   ]
+  }
+ ],
+ "lint_wall": true,
+ "line_count": 66,
+ "selfcheck_state": [
+  {
+   "name": "pre_cnt",
+   "expr": "pre_cnt",
+   "width": 4,
+   "compare": true
+  },
+  {
+   "name": "tick",
+   "expr": "tick",
+   "width": 1,
+   "compare": true
+  },
+  {
+   "name": "cnt",
+   "expr": "cnt",
+   "width": 8,
+   "compare": true
+  },
+  {
+   "name": "duty_q",
+   "expr": "duty_q",
+   "width": 8,
+   "compare": true
+  }
+ ]
+}

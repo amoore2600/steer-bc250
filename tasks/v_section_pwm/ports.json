@@ -1,0 +1,1 @@
+{"ports": [["clk", "input", 1], ["reset", "input", 1], ["en", "input", 1], ["duty", "input", 8], ["pwm", "output", 1], ["period_start", "output", 1]]}

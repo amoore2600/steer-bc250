@@ -1,0 +1,124 @@
+{
+ "id": "v_rebuild_ce_frac",
+ "golden": {
+  "task": "v_rebuild_ce_frac",
+  "stage": "done",
+  "detail": "equivalent on 4 seeds",
+  "lint_warnings_raw": 1,
+  "sim_seeds": [
+   {
+    "seed": 1,
+    "ok": true,
+    "s": 0.9
+   },
+   {
+    "seed": 2,
+    "ok": true,
+    "s": 0.6
+   },
+   {
+    "seed": 3,
+    "ok": true,
+    "s": 0.8
+   },
+   {
+    "seed": 4,
+    "ok": true,
+    "s": 0.6
+   }
+  ],
+  "seed_set": "default",
+  "known_bits": 319980,
+  "lint_wall": {
+   "checked": true,
+   "warnings": 0,
+   "first": null,
+   "waiver_problems": 0
+  },
+  "hygiene": {
+   "missing_header": 0,
+   "nettype_leak": 0,
+   "non_ascii": 0,
+   "initial_blocks": 0,
+   "dead_code": 0,
+   "debug_left": 0
+  },
+  "pinned": [],
+  "syn": null,
+  "grade_s": 3.1,
+  "pass": true
+ },
+ "start": [
+  {
+   "file": "start.v",
+   "task": "v_rebuild_ce_frac",
+   "stage": "sim",
+   "detail": "seed 1: MISMATCH t=100 cyc=0 port=ce golden=0 candidate=x | MISMATCH_INPUTS cyc=0 reset=0",
+   "lint_warnings_raw": 6,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  }
+ ],
+ "mutants": [
+  {
+   "file": "m1.v",
+   "task": "v_rebuild_ce_frac",
+   "stage": "sim",
+   "detail": "seed 1: MISMATCH t=13600 cyc=14 port=ce golden=1 candidate=0 | MISMATCH_INPUTS cyc=14 reset=0",
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "m2.v",
+   "task": "v_rebuild_ce_frac",
+   "stage": "sim",
+   "detail": "seed 1: MISMATCH t=6600 cyc=7 port=ce golden=1 candidate=0 | MISMATCH_INPUTS cyc=7 reset=0",
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  },
+  {
+   "file": "m3.v",
+   "task": "v_rebuild_ce_frac",
+   "stage": "sim",
+   "detail": "seed 1: MISMATCH t=3600 cyc=4 port=ce golden=0 candidate=1 | MISMATCH_INPUTS cyc=4 reset=0",
+   "lint_warnings_raw": 1,
+   "sim_seeds": [
+    {
+     "seed": 1,
+     "ok": false,
+     "s": 0.0
+    }
+   ],
+   "seed_set": "default",
+   "grade_s": 0.2,
+   "pass": false
+  }
+ ],
+ "valid": true
+}

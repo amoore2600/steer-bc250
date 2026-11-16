@@ -1,0 +1,26 @@
+{
+ "task": "v_rebuild_ce_frac",
+ "language": "verilog",
+ "top": "ce_frac",
+ "seed": 9001,
+ "cycles": 8000,
+ "sample_points": 79995,
+ "output_events": 6612,
+ "output_bits": 1,
+ "grader_seeds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "files": [
+  "tb_selfcheck.v",
+  "tb_selfcheck_vectors.vh"
+ ],
+ "hdl_check_args": [
+  "--tb",
+  "tb_selfcheck.v",
+  "ce_frac.v"
+ ],
+ "hdl_check_cmd": "bash ~/.config/opencode/skills/hdl-check/hdl-check.sh --tb tb_selfcheck.v ce_frac.v"
+}
